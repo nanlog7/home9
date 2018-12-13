@@ -1,0 +1,211 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+   	
+	<!-- Our CSS -->
+	<style>
+	
+		.container, h1 {
+			margin-top: 10px;
+		}
+		
+		h1 {
+			margin-bottom: 20px;
+		}
+
+	</style>
+	
+	<!-- Our JS -->
+	<script>
+				
+	</script>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-12 text-center">
+				<h1 class="display-1">PhonesShop</h1>
+			</div>	
+			
+			<div class="col-6 offset-3 text-center">
+				<div class="row">
+					<div class="col-3">
+						<input type="range" id="min_price_range">
+					</div>
+					
+					<div class="col-6">
+						<h6>
+							Price from <span id="min_price_label">0</span> $ 
+							to <span id="max_price_label">0</span> $
+						</h6>
+					</div>
+					
+					<div class="col-3">
+						<input type="range" id="max_price_range">
+					</div>
+				</div>
+			</div>
+						
+			<div class="col-6 offset-3">
+				<ul class="list-group" id="phones_ul">
+					<li class="list-group-item justify-content-between">
+						iPhone 8
+						<span class="badge badge-default badge-pill">-</span>
+					</li>
+					<li class="list-group-item justify-content-between">
+						iPhone 7
+						<span class="badge badge-default badge-pill">-</span>
+					</li>
+					<li class="list-group-item justify-content-between">
+						Apple iPhone 6
+						<span class="badge badge-default badge-pill">-</span>
+					</li>
+					<li class="list-group-item justify-content-between">
+						Samsung Galaxy S9
+						<span class="badge badge-default badge-pill">-</span>
+					</li>
+					<li class="list-group-item justify-content-between">
+						Nokia 3310
+						<span class="badge badge-default badge-pill">-</span>
+					</li>
+					<li class="list-group-item justify-content-between">
+						HTC Two M3
+						<span class="badge badge-default badge-pill">-</span>
+					</li>
+					<li class="list-group-item justify-content-between">
+						Lenovo H6000
+						<span class="badge badge-default badge-pill">-</span>
+					</li>
+					<li class="list-group-item justify-content-between">
+						Microsoft Lumia 950
+						<span class="badge badge-default badge-pill">-</span>
+					</li>
+					<li class="list-group-item justify-content-between">
+						Sony Ericsson  K750 Gold
+						<span class="badge badge-default badge-pill">-</span>
+					</li>					
+				</ul>
+			</div>
+			<script>
+				
+				function generate_price(){
+					return (Math.floor(Math.random()*900) + 100) + " $";
+				}
+				
+				var prices = document.querySelectorAll("ul > li > span");
+				
+				prices.forEach(function(element){
+					element.innerHTML = generate_price();
+				});
+				
+				</script>
+<script>
+			
+	
+var prices = document.querySelectorAll("li span");
+
+
+prices = [...prices].map(item => parseInt(item.innerHTML));
+console.log(prices);
+
+var low = Math.min(...prices);
+var high = Math.max(...prices);
+
+min_price_range.min = low;
+max_price_range.min = low;
+
+min_price_range.max = high;
+max_price_range.max = high;
+
+min_price_range.value = low;
+max_price_range.value = high;
+
+min_price_label.innerHTML = low;
+max_price_label.innerHTML = high;
+
+	
+	
+
+	
+ 
+function filter(){
+
+	var min = min_price_range.value;
+	var max = max_price_range.value;
+	
+	
+	
+function handler1() {
+    
+	if(max < min){	
+	min = max;
+		
+	max_price_range.value = min;
+	min_price_range.value = min;
+	min_price_label.innerHTML = min;
+	max_price_label.innerHTML = min;
+	console.log(min,max);
+	}
+ };
+ function handler2() {
+    
+	if(max < min){	
+	max = min;
+	
+	
+	max_price_range.value = max;
+	min_price_range.value = max;
+	min_price_label.innerHTML = max;
+	max_price_label.innerHTML = max;
+	console.log(min,max);
+	}
+ };
+ 
+	max_price_range.addEventListener("input", handler1); 
+	min_price_range.addEventListener("input", handler2);
+ 
+ 
+	if(max>=min){
+	
+	max_price_range.removeEventListener("input", handler1);	
+	min_price_range.removeEventListener("input", handler2);
+	
+	}
+	
+	min_price_label.innerHTML = min;
+	max_price_label.innerHTML = max;
+	
+	
+	 var spans = document.querySelectorAll("li span");
+    
+    spans.forEach(span =>{
+        var price = parseInt(span.innerHTML);
+        if(price >= min && price <= max){
+            span.parentNode.style.display = "flex";
+        }else{
+            span.parentNode.style.display = "none";
+        }
+		
+		
+    });
+	
+}
+
+
+min_price_range.oninput = filter;
+max_price_range.oninput = filter;
+
+</script>
+			
+		</div>	
+	</div>
+</body>
+</html>
